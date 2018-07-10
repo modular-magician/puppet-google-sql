@@ -439,6 +439,7 @@ describe Puppet::Type.type(:gsql_user).provider(:google) do
                 ensure     => absent,
                 host       => 'test host#0 data',
                 instance   => 'resource(instance,0)',
+                password   => 'test password#0 data',
                 project    => 'test project#0 data',
                 credential => 'cred0',
               }
@@ -482,6 +483,7 @@ describe Puppet::Type.type(:gsql_user).provider(:google) do
                 host       => 'test host#0 data',
                 instance   => 'resource(instance,0)',
                 name       => 'test name#0 data',
+                password   => 'test password#0 data',
                 project    => 'test project#0 data',
                 credential => 'cred0',
               }
@@ -532,6 +534,7 @@ describe Puppet::Type.type(:gsql_user).provider(:google) do
                 ensure     => absent,
                 host       => 'test host#0 data',
                 instance   => 'resource(instance,0)',
+                password   => 'test password#0 data',
                 project    => 'test project#0 data',
                 credential => 'cred0',
               }
@@ -577,6 +580,7 @@ describe Puppet::Type.type(:gsql_user).provider(:google) do
                 host       => 'test host#0 data',
                 instance   => 'resource(instance,0)',
                 name       => 'test name#0 data',
+                password   => 'test password#0 data',
                 project    => 'test project#0 data',
                 credential => 'cred0',
               }

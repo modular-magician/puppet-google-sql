@@ -595,7 +595,7 @@ Required.  The name of the Cloud SQL instance. This does not include the project
 
 ##### `password`
 
-  The password for the user.
+Required.  The password for the user.
 
 
 #### `gsql_ssl_cert`
