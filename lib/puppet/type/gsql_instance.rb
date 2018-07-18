@@ -27,14 +27,17 @@
 
 require 'google/object_store'
 require 'google/sql/property/boolean'
-require 'google/sql/property/enum'
 require 'google/sql/property/instance_authorized_networks'
+require 'google/sql/property/instance_backend_type'
+require 'google/sql/property/instance_database_version'
 require 'google/sql/property/instance_failover_replica'
+require 'google/sql/property/instance_instance_type'
 require 'google/sql/property/instance_ip_addresses'
 require 'google/sql/property/instance_ip_configuration'
 require 'google/sql/property/instance_mysql_replica_configuration'
 require 'google/sql/property/instance_replica_configuration'
 require 'google/sql/property/instance_settings'
+require 'google/sql/property/instance_type'
 require 'google/sql/property/integer'
 require 'google/sql/property/string'
 require 'google/sql/property/string_array'
@@ -71,7 +74,7 @@ Puppet::Type.newtype(:gsql_instance) do
     desc 'The name of the Instance.'
   end
 
-  newproperty(:backend_type, parent: Google::Sql::Property::Enum) do
+  newproperty(:backend_type, parent: Google::Sql::Property::BackendTypeEnum) do
     desc <<-DOC
       * FIRST_GEN: First Generation instance. MySQL only. * SECOND_GEN: Second Generation instance
       or PostgreSQL instance. * EXTERNAL: A database server that is not managed by Google.
@@ -85,7 +88,7 @@ Puppet::Type.newtype(:gsql_instance) do
     desc 'Connection name of the Cloud SQL instance used in connection strings.'
   end
 
-  newproperty(:database_version, parent: Google::Sql::Property::Enum) do
+  newproperty(:database_version, parent: Google::Sql::Property::DatabaseVersionEnum) do
     desc <<-DOC
       The database engine type and version. For First Generation instances, can be MYSQL_5_5, or
       MYSQL_5_6. For Second Generation instances, can be MYSQL_5_6 or MYSQL_5_7. Defaults to
@@ -105,7 +108,7 @@ Puppet::Type.newtype(:gsql_instance) do
     DOC
   end
 
-  newproperty(:instance_type, parent: Google::Sql::Property::Enum) do
+  newproperty(:instance_type, parent: Google::Sql::Property::InstanceTypeEnum) do
     desc <<-DOC
       The instance type. This can be one of the following. * CLOUD_SQL_INSTANCE: A Cloud SQL
       instance that is not replicating  from a master. * ON_PREMISES_INSTANCE: An instance running

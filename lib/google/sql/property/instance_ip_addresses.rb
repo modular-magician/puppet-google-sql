@@ -91,7 +91,7 @@ module Google
         def initialize(args)
           @ip_address = Google::Sql::Property::String.api_munge(args['ipAddress'])
           @time_to_retire = Google::Sql::Property::Time.api_munge(args['timeToRetire'])
-          @type = Google::Sql::Property::Enum.api_munge(args['type'])
+          @type = Google::Sql::Property::TypeEnum.api_munge(args['type'])
         end
       end
 
@@ -101,7 +101,7 @@ module Google
         def initialize(args)
           @ip_address = Google::Sql::Property::String.unsafe_munge(args['ip_address'])
           @time_to_retire = Google::Sql::Property::Time.unsafe_munge(args['time_to_retire'])
-          @type = Google::Sql::Property::Enum.unsafe_munge(args['type'])
+          @type = Google::Sql::Property::TypeEnum.unsafe_munge(args['type'])
         end
       end
     end

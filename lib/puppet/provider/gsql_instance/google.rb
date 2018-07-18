@@ -32,14 +32,17 @@ require 'google/sql/network/get'
 require 'google/sql/network/post'
 require 'google/sql/network/put'
 require 'google/sql/property/boolean'
-require 'google/sql/property/enum'
 require 'google/sql/property/instance_authorized_networks'
+require 'google/sql/property/instance_backend_type'
+require 'google/sql/property/instance_database_version'
 require 'google/sql/property/instance_failover_replica'
+require 'google/sql/property/instance_instance_type'
 require 'google/sql/property/instance_ip_addresses'
 require 'google/sql/property/instance_ip_configuration'
 require 'google/sql/property/instance_mysql_replica_configuration'
 require 'google/sql/property/instance_replica_configuration'
 require 'google/sql/property/instance_settings'
+require 'google/sql/property/instance_type'
 require 'google/sql/property/integer'
 require 'google/sql/property/string'
 require 'google/sql/property/string_array'
@@ -78,12 +81,13 @@ Puppet::Type.type(:gsql_instance).provide(:google) do
   # rubocop:disable Metrics/MethodLength
   def self.fetch_to_hash(fetch)
     {
-      backend_type: Google::Sql::Property::Enum.api_munge(fetch['backendType']),
+      backend_type: Google::Sql::Property::BackendTypeEnum.api_munge(fetch['backendType']),
       connection_name: Google::Sql::Property::String.api_munge(fetch['connectionName']),
-      database_version: Google::Sql::Property::Enum.api_munge(fetch['databaseVersion']),
+      database_version:
+        Google::Sql::Property::DatabaseVersionEnum.api_munge(fetch['databaseVersion']),
       failover_replica:
         Google::Sql::Property::InstancFailoveReplica.api_munge(fetch['failoverReplica']),
-      instance_type: Google::Sql::Property::Enum.api_munge(fetch['instanceType']),
+      instance_type: Google::Sql::Property::InstanceTypeEnum.api_munge(fetch['instanceType']),
       ip_addresses: Google::Sql::Property::InstancIpAddressArray.api_munge(fetch['ipAddresses']),
       ipv6_address: Google::Sql::Property::String.api_munge(fetch['ipv6Address']),
       master_instance_name: Google::Sql::Property::String.api_munge(fetch['masterInstanceName']),
