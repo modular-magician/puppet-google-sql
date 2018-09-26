@@ -36,7 +36,6 @@ Puppet::Type.newtype(:gsql_ssl_cert) do
     must have the SSL Client Certificate and the associated SSL Client Key. The Client Key can be
     downloaded only when the SSL certificate is created with the insert method.
   DOC
-
   autorequire(:gauth_credential) do
     credential = self[:credential]
     raise "#{ref}: required property 'credential' is missing" if credential.nil?
@@ -48,6 +47,13 @@ Puppet::Type.newtype(:gsql_ssl_cert) do
     raise "#{ref} required property 'instance' is missing" if reference.nil?
     reference.autorequires
   end
+
+  autobefore(:gsql_instance) do
+    reference = self[:instance]
+    raise "#{ref} required property 'instance' is missing" if reference.nil?
+    reference.autorequires
+  end
+
 
   newparam :credential do
     desc <<-DESC

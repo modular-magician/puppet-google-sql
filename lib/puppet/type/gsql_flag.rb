@@ -33,7 +33,6 @@ require 'puppet'
 
 Puppet::Type.newtype(:gsql_flag) do
   @doc = 'Represents a flag that can be configured for a Cloud SQL instance.'
-
   autorequire(:gauth_credential) do
     credential = self[:credential]
     raise "#{ref}: required property 'credential' is missing" if credential.nil?

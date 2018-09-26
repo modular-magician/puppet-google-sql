@@ -37,7 +37,6 @@ Puppet::Type.newtype(:gsql_tier) do
     tier can be used. Available tiers vary depending on whether you use PostgreSQL, MySQL Second
     Generation, or MySQL First Generation instances.
   DOC
-
   autorequire(:gauth_credential) do
     credential = self[:credential]
     raise "#{ref}: required property 'credential' is missing" if credential.nil?

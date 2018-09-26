@@ -33,16 +33,45 @@ Puppet::Type.newtype(:gsql_user) do
   @doc = 'The Users resource represents a database user in a Cloud SQL instance.'
 
   autorequire(:gauth_credential) do
-    credential = self[:credential]
-    raise "#{ref}: required property 'credential' is missing" if credential.nil?
-    [credential]
+    if self[:ensure] == :present
+      credential = self[:credential]
+      raise "#{ref}: required property 'credential' is missing" if credential.nil?
+      [credential]
+    else
+      []
+    end
+  end
+
+  autobefore(:gauth_credential) do
+    if self[:ensure] == :absent
+      credential = self[:credential]
+      raise "#{ref}: required property 'credential' is missing" if credential.nil?
+      [credential]
+    else
+      []
+    end
   end
 
   autorequire(:gsql_instance) do
-    reference = self[:instance]
-    raise "#{ref} required property 'instance' is missing" if reference.nil?
-    reference.autorequires
+    if self[:ensure] == :present
+      reference = self[:instance]
+      raise "#{ref} required property 'instance' is missing" if reference.nil?
+      reference.autorequires
+    else
+      []
+    end
   end
+
+  autobefore(:gsql_instance) do
+    if self[:ensure] == :absent
+      reference = self[:instance]
+      raise "#{ref} required property 'instance' is missing" if reference.nil?
+      reference.autorequires
+    else
+      []
+    end
+  end
+
 
   ensurable
 
