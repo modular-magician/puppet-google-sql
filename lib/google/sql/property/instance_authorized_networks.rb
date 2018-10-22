@@ -32,7 +32,7 @@ module Google
   module Sql
     module Data
       # A class to manage data for AuthorizedNetworks for instance.
-      class InstanceAuthorizedNetworks
+      class InstanceAuthorizednetworks
         include Comparable
 
         attr_reader :expiration_time
@@ -56,7 +56,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? InstanceAuthorizedNetworks
+          return false unless other.is_a? InstanceAuthorizednetworks
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -65,7 +65,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? InstanceAuthorizedNetworks
+          return false unless other.is_a? InstanceAuthorizednetworks
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -85,9 +85,9 @@ module Google
         end
       end
 
-      # Manages a InstanceAuthorizedNetworks nested object
+      # Manages a InstanceAuthorizednetworks nested object
       # Data is coming from the GCP API
-      class InstanceAuthorizedNetworksApi < InstanceAuthorizedNetworks
+      class InstanceAuthorizednetworksApi < InstanceAuthorizednetworks
         def initialize(args)
           @expiration_time = Google::Sql::Property::Time.api_munge(args['expirationTime'])
           @name = Google::Sql::Property::String.api_munge(args['name'])
@@ -95,9 +95,9 @@ module Google
         end
       end
 
-      # Manages a InstanceAuthorizedNetworks nested object
+      # Manages a InstanceAuthorizednetworks nested object
       # Data is coming from the Puppet manifest
-      class InstanceAuthorizedNetworksCatalog < InstanceAuthorizedNetworks
+      class InstanceAuthorizednetworksCatalog < InstanceAuthorizednetworks
         def initialize(args)
           @expiration_time = Google::Sql::Property::Time.unsafe_munge(args['expiration_time'])
           @name = Google::Sql::Property::String.unsafe_munge(args['name'])
@@ -108,7 +108,7 @@ module Google
 
     module Property
       # A class to manage input to AuthorizedNetworks for instance.
-      class InstanceAuthorizedNetworks < Google::Sql::Property::Base
+      class InstanceAuthorizednetworks < Google::Sql::Property::Base
         # Used for parsing Puppet catalog
         def unsafe_munge(value)
           self.class.unsafe_munge(value)
@@ -117,18 +117,18 @@ module Google
         # Used for parsing Puppet catalog
         def self.unsafe_munge(value)
           return if value.nil?
-          Data::InstanceAuthorizedNetworksCatalog.new(value)
+          Data::InstanceAuthorizednetworksCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_munge(value)
           return if value.nil?
-          Data::InstanceAuthorizedNetworksApi.new(value)
+          Data::InstanceAuthorizednetworksApi.new(value)
         end
       end
 
       # A Puppet property that holds an integer
-      class InstanceAuthorizedNetworksArray < Google::Sql::Property::Array
+      class InstanceAuthorizednetworksArray < Google::Sql::Property::Array
         # Used for parsing Puppet catalog
         def unsafe_munge(value)
           self.class.unsafe_munge(value)
@@ -137,17 +137,17 @@ module Google
         # Used for parsing Puppet catalog
         def self.unsafe_munge(value)
           return if value.nil?
-          return InstanceAuthorizedNetworks.unsafe_munge(value) \
+          return InstanceAuthorizednetworks.unsafe_munge(value) \
             unless value.is_a?(::Array)
-          value.map { |v| InstanceAuthorizedNetworks.unsafe_munge(v) }
+          value.map { |v| InstanceAuthorizednetworks.unsafe_munge(v) }
         end
 
         # Used for parsing GCP API responses
         def self.api_munge(value)
           return if value.nil?
-          return InstanceAuthorizedNetworks.api_munge(value) \
+          return InstanceAuthorizednetworks.api_munge(value) \
             unless value.is_a?(::Array)
-          value.map { |v| InstanceAuthorizedNetworks.api_munge(v) }
+          value.map { |v| InstanceAuthorizednetworks.api_munge(v) }
         end
       end
     end
