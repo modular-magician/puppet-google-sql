@@ -31,7 +31,7 @@ module Google
   module Sql
     module Data
       # A class to manage data for FailoverReplica for instance.
-      class InstanceFailoverReplica
+      class InstanceFailoverreplica
         include Comparable
 
         attr_reader :available
@@ -52,7 +52,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? InstanceFailoverReplica
+          return false unless other.is_a? InstanceFailoverreplica
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -61,7 +61,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? InstanceFailoverReplica
+          return false unless other.is_a? InstanceFailoverreplica
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -80,18 +80,18 @@ module Google
         end
       end
 
-      # Manages a InstanceFailoverReplica nested object
+      # Manages a InstanceFailoverreplica nested object
       # Data is coming from the GCP API
-      class InstanceFailoverReplicaApi < InstanceFailoverReplica
+      class InstanceFailoverreplicaApi < InstanceFailoverreplica
         def initialize(args)
           @available = Google::Sql::Property::Boolean.api_munge(args['available'])
           @name = Google::Sql::Property::String.api_munge(args['name'])
         end
       end
 
-      # Manages a InstanceFailoverReplica nested object
+      # Manages a InstanceFailoverreplica nested object
       # Data is coming from the Puppet manifest
-      class InstanceFailoverReplicaCatalog < InstanceFailoverReplica
+      class InstanceFailoverreplicaCatalog < InstanceFailoverreplica
         def initialize(args)
           @available = Google::Sql::Property::Boolean.unsafe_munge(args['available'])
           @name = Google::Sql::Property::String.unsafe_munge(args['name'])
@@ -101,7 +101,7 @@ module Google
 
     module Property
       # A class to manage input to FailoverReplica for instance.
-      class InstanceFailoverReplica < Google::Sql::Property::Base
+      class InstanceFailoverreplica < Google::Sql::Property::Base
         # Used for parsing Puppet catalog
         def unsafe_munge(value)
           self.class.unsafe_munge(value)
@@ -110,13 +110,13 @@ module Google
         # Used for parsing Puppet catalog
         def self.unsafe_munge(value)
           return if value.nil?
-          Data::InstanceFailoverReplicaCatalog.new(value)
+          Data::InstanceFailoverreplicaCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_munge(value)
           return if value.nil?
-          Data::InstanceFailoverReplicaApi.new(value)
+          Data::InstanceFailoverreplicaApi.new(value)
         end
       end
     end

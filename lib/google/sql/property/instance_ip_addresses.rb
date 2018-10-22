@@ -32,7 +32,7 @@ module Google
   module Sql
     module Data
       # A class to manage data for IpAddresses for instance.
-      class InstanceIpAddresses
+      class InstanceIpaddresses
         include Comparable
 
         attr_reader :ip_address
@@ -56,7 +56,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? InstanceIpAddresses
+          return false unless other.is_a? InstanceIpaddresses
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -65,7 +65,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? InstanceIpAddresses
+          return false unless other.is_a? InstanceIpaddresses
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -85,9 +85,9 @@ module Google
         end
       end
 
-      # Manages a InstanceIpAddresses nested object
+      # Manages a InstanceIpaddresses nested object
       # Data is coming from the GCP API
-      class InstanceIpAddressesApi < InstanceIpAddresses
+      class InstanceIpaddressesApi < InstanceIpaddresses
         def initialize(args)
           @ip_address = Google::Sql::Property::String.api_munge(args['ipAddress'])
           @time_to_retire = Google::Sql::Property::Time.api_munge(args['timeToRetire'])
@@ -95,9 +95,9 @@ module Google
         end
       end
 
-      # Manages a InstanceIpAddresses nested object
+      # Manages a InstanceIpaddresses nested object
       # Data is coming from the Puppet manifest
-      class InstanceIpAddressesCatalog < InstanceIpAddresses
+      class InstanceIpaddressesCatalog < InstanceIpaddresses
         def initialize(args)
           @ip_address = Google::Sql::Property::String.unsafe_munge(args['ip_address'])
           @time_to_retire = Google::Sql::Property::Time.unsafe_munge(args['time_to_retire'])
@@ -108,7 +108,7 @@ module Google
 
     module Property
       # A class to manage input to IpAddresses for instance.
-      class InstanceIpAddresses < Google::Sql::Property::Base
+      class InstanceIpaddresses < Google::Sql::Property::Base
         # Used for parsing Puppet catalog
         def unsafe_munge(value)
           self.class.unsafe_munge(value)
@@ -117,18 +117,18 @@ module Google
         # Used for parsing Puppet catalog
         def self.unsafe_munge(value)
           return if value.nil?
-          Data::InstanceIpAddressesCatalog.new(value)
+          Data::InstanceIpaddressesCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_munge(value)
           return if value.nil?
-          Data::InstanceIpAddressesApi.new(value)
+          Data::InstanceIpaddressesApi.new(value)
         end
       end
 
       # A Puppet property that holds an integer
-      class InstanceIpAddressesArray < Google::Sql::Property::Array
+      class InstanceIpaddressesArray < Google::Sql::Property::Array
         # Used for parsing Puppet catalog
         def unsafe_munge(value)
           self.class.unsafe_munge(value)
@@ -137,17 +137,17 @@ module Google
         # Used for parsing Puppet catalog
         def self.unsafe_munge(value)
           return if value.nil?
-          return InstanceIpAddresses.unsafe_munge(value) \
+          return InstanceIpaddresses.unsafe_munge(value) \
             unless value.is_a?(::Array)
-          value.map { |v| InstanceIpAddresses.unsafe_munge(v) }
+          value.map { |v| InstanceIpaddresses.unsafe_munge(v) }
         end
 
         # Used for parsing GCP API responses
         def self.api_munge(value)
           return if value.nil?
-          return InstanceIpAddresses.api_munge(value) \
+          return InstanceIpaddresses.api_munge(value) \
             unless value.is_a?(::Array)
-          value.map { |v| InstanceIpAddresses.api_munge(v) }
+          value.map { |v| InstanceIpaddresses.api_munge(v) }
         end
       end
     end

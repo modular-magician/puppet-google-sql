@@ -31,7 +31,7 @@ module Google
   module Sql
     module Data
       # A class to manage data for ReplicaConfiguration for instance.
-      class InstanceReplicaConfiguration
+      class InstanceReplicaconfiguration
         include Comparable
 
         attr_reader :failover_target
@@ -58,7 +58,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? InstanceReplicaConfiguration
+          return false unless other.is_a? InstanceReplicaconfiguration
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -67,7 +67,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? InstanceReplicaConfiguration
+          return false unless other.is_a? InstanceReplicaconfiguration
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -88,13 +88,13 @@ module Google
         end
       end
 
-      # Manages a InstanceReplicaConfiguration nested object
+      # Manages a InstanceReplicaconfiguration nested object
       # Data is coming from the GCP API
-      class InstanceReplicaConfigurationApi < InstanceReplicaConfiguration
+      class InstanceReplicaconfigurationApi < InstanceReplicaconfiguration
         def initialize(args)
           @failover_target = Google::Sql::Property::Boolean.api_munge(args['failoverTarget'])
           @mysql_replica_configuration =
-            Google::Sql::Property::InstanceMysqlReplicaConfiguration.api_munge(
+            Google::Sql::Property::InstanceMysqlreplicaconfiguration.api_munge(
               args['mysqlReplicaConfiguration']
             )
           @replica_names = Google::Sql::Property::StringArray.api_munge(args['replicaNames'])
@@ -103,13 +103,13 @@ module Google
         end
       end
 
-      # Manages a InstanceReplicaConfiguration nested object
+      # Manages a InstanceReplicaconfiguration nested object
       # Data is coming from the Puppet manifest
-      class InstanceReplicaConfigurationCatalog < InstanceReplicaConfiguration
+      class InstanceReplicaconfigurationCatalog < InstanceReplicaconfiguration
         def initialize(args)
           @failover_target = Google::Sql::Property::Boolean.unsafe_munge(args['failover_target'])
           @mysql_replica_configuration =
-            Google::Sql::Property::InstanceMysqlReplicaConfiguration.unsafe_munge(
+            Google::Sql::Property::InstanceMysqlreplicaconfiguration.unsafe_munge(
               args['mysql_replica_configuration']
             )
           @replica_names = Google::Sql::Property::StringArray.unsafe_munge(args['replica_names'])
@@ -121,7 +121,7 @@ module Google
 
     module Property
       # A class to manage input to ReplicaConfiguration for instance.
-      class InstanceReplicaConfiguration < Google::Sql::Property::Base
+      class InstanceReplicaconfiguration < Google::Sql::Property::Base
         # Used for parsing Puppet catalog
         def unsafe_munge(value)
           self.class.unsafe_munge(value)
@@ -130,13 +130,13 @@ module Google
         # Used for parsing Puppet catalog
         def self.unsafe_munge(value)
           return if value.nil?
-          Data::InstanceReplicaConfigurationCatalog.new(value)
+          Data::InstanceReplicaconfigurationCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_munge(value)
           return if value.nil?
-          Data::InstanceReplicaConfigurationApi.new(value)
+          Data::InstanceReplicaconfigurationApi.new(value)
         end
       end
     end
